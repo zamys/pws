@@ -15,8 +15,7 @@ api = tweepy.API(auth)
 date_today = datetime.datetime.now() #datum van vandaag
 tweets_per_query = 100 #Meer mag niet van twitter
 tweets_max = 500 #Hoeveel tweets er totaal worden opgeslagen
-file_name = 'tweets'+'-'date_today.strftime('%d'-'%m'+'-'+'%y')
-
+file_name = 'tweets-'+ date_today.strftime('%d-%m-%y')
 since_id = None
 max_id = -1
 tweet_count = 0
@@ -30,22 +29,22 @@ with open(file_name,'w') as f:
         try:
             if(max_id<=0):
                 if(not since_id):
-                    tweets_new = api.search(q=search_query,count=tweetsPerQuery,lang="en",tweet_mode='extended')
+                    tweets_new = api.search(q=search_query,count=tweets_per_query,lang="en",tweet_mode='extended')
 
                 else:
-                    tweets_new = api.search(q=search_query,count=tweetsPerQuery,lang="en",tweet_mode='extended',since_id=since_id)
+                    tweets_new = api.search(q=search_query,count=tweets_per_query,lang="en",tweet_mode='extended',since_id=since_id)
             else:
                 if(not since_id):
-                    tweets_new = api.search(q=search_query,count=tweetsPerQuery,lang="en",tweet_mode='extended',max_id=str(max_id-1))
+                    tweets_new = api.search(q=search_query,count=tweets_per_query,lang="en",tweet_mode='extended',max_id=str(max_id-1))
                 else:
-                    tweets_new = api.search(q=search_query,count=tweetsPerQuery,lang="en",tweet_mode='extended',max_id=str(max_id-1),since_id=since_id)
+                    tweets_new = api.search(q=search_query,count=tweets_per_query,lang="en",tweet_mode='extended',max_id=str(max_id-1),since_id=since_id)
 
             #Als er geen nieuwe tweets zijn binnen gekomen:
             if(not tweets_new):
                 print("Geen nieuwe tweets gevonden")
                 break
-
-            for(tweet in tweets_new):
+            
+            for tweet in tweets_new:
                 f.write(jsonpickle.encode(tweet._json,unpicklable=False)+'\n')
                 tweet_count += len(tweets_new)
                 print("{0} tweets zijn gedownload".format(tweet_count))
