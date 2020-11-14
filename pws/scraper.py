@@ -60,7 +60,3 @@ time_elapsed = time_end-time_start
 
 print("{0} tweets zijn gedownload en zijn opgeslagen in {1}".format(tweet_count,file_name))
 print("Het heeft {0} seconden geduurd".format(time_elapsed))
-
-
-
-
