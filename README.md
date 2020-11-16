@@ -1,2 +1,2 @@
-# pws
-Profielwerkstuk: Twitter Semantic Analysis
+# PWS
+Twitter Semantic Analysis
