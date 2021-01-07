@@ -34,5 +34,3 @@ for tweet in tweets:
         line_amount+-1
     except Exception as err:
         print(err)
-
-
